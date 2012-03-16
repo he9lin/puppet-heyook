@@ -1,7 +1,7 @@
 node 'app' {
   include nginx
-  # include redis
-  # include mongodb
+  include redis
+  include mongodb
   include railsapp
 
   nginx::resource::upstream { 'thin':
