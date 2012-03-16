@@ -1,0 +1,6 @@
+[submodule "modules/nginx"]
+	path = modules/nginx
+	url = git@github.com:heyook/puppet-nginx.git
+[submodule "modules/mongodb"]
+	path = modules/mongodb
+	url = git@github.com:heyook/puppet-mongodb.git
