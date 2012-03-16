@@ -4,3 +4,6 @@
 [submodule "modules/mongodb"]
 	path = modules/mongodb
 	url = git@github.com:heyook/puppet-mongodb.git
+[submodule "modules/redis"]
+	path = modules/redis
+	url = git@github.com:heyook/puppet-redis.git
