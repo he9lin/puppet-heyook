@@ -6,11 +6,28 @@ node 'app' {
   include nodejs
   include railsapp
 
-  nginx::resource::upstream { 'thin':
+  $app_name = 'jieqoo.com'
+  
+  railsapp::resource::location { $app_name: }
+    
+  nginx::resource::upstream { 'rails_server':
       ensure  => present,
       members => [
         'localhost:3000',
       ],
+  }
+  
+  nginx::resource::vhost { $app_name:
+    ensure      => present,
+    www_root    => "/var/www/$app_name/current/public",
+    listen_port => '80',
+  }
+
+  nginx::resource::location { "#{$app_name}-rails-server":
+    ensure   => present,
+    proxy    => 'http://rails_server',
+    location => '@rails_server',
+    vhost    => $app_name,
   }
   
   nginx::resource::upstream { 'faye':
@@ -20,25 +37,11 @@ node 'app' {
       ],
   }
   
-  nginx::resource::vhost { 'jieqoo.com':
-    ensure      => present,
-    www_root    => '/var/www/jieqoo.com/current/public',
-    listen_port => '80',
-  }
-
-  # Use a variable for thin
-  nginx::resource::location { 'jieqoo.com-thin':
-    ensure   => present,
-    proxy    => 'http://thin',
-    location => '@thin',
-    vhost    => 'jieqoo.com',
-  }
-  
-  nginx::resource::location { 'jieqoo.com-faye':
+  nginx::resource::location { "#{$app_name}-faye":
     ensure   => present,
     proxy    => 'http://faye',
     location => '/faye',
-    vhost    => 'jieqoo.com',
+    vhost    => $app_name,
   }
 }
 
