@@ -1,3 +1,4 @@
+# TODO: make jieqoo.com a variable
 class railsapp {
   file {
     ["/var/www/jieqoo.com/", 
