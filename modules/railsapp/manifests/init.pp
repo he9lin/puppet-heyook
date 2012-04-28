@@ -9,4 +9,8 @@ class railsapp {
       group  => vagrant,
       mode   => 775
   }
+  package {
+    "bundler":
+      provider => gem
+  }
 }

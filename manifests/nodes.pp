@@ -41,3 +41,5 @@ node 'app' {
     vhost    => 'jieqoo.com',
   }
 }
+
+# ssh-keygen -t rsa -C "he9lin@youremail.com"
